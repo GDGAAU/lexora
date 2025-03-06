@@ -1,9 +1,12 @@
+import React from 'react';
+import Routering from '../Routering';
 function App() {
   
 
   return (
     <>
-      <h1>hello</h1>    </>
+      <Routering/>   
+      </>
   )
 }
 
