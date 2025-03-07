@@ -9,21 +9,21 @@ export default function MyCourses() {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <Link to="/cs/Year2">
+        <Link to="/cs/year2/semester">
           <CourseCard
             year="Year 2"
             imageSrc="https://via.placeholder.com/96"
             altText="Year 2"
           />
         </Link>
-        <Link to="/cs/Year3">
+        <Link to="/cs/Year3/semester">
           <CourseCard
             year="Year 3"
             imageSrc="https://via.placeholder.com/96"
             altText="Year 3"
           />
         </Link>
-        <Link to="/cs/Year4">
+        <Link to="/cs/Year4/semester">
           <CourseCard
             year="Year 4"
             imageSrc="https://via.placeholder.com/96"
