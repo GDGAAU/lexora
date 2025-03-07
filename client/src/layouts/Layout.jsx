@@ -1,12 +1,14 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-function Layout({children}) {
+import { Sidebar } from "./Sidebar"
+import Navbar from '../components/Navbar'
+export function Layout({ children }) {
   return (
-    <div>
+    <div className="flex min-h-screen bg-gray-50">
       <Navbar/>
-      {children}
+      <Sidebar />
+      <div className="flex-1 md:ml-64">
+        <main className="p-4 md:p-8">{children}</main>
+      </div>
     </div>
   )
 }
 
-export default Layout;

@@ -29,7 +29,7 @@ const handleIsNavMenuOpened = () => {
             </p>
           </NavLink>
         </div>
-
+    
         {!isNavMenuOpened ? (
           <div
             onClick={handleIsNavMenuOpened}
