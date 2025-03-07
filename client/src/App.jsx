@@ -13,6 +13,7 @@ import BiologyCard from "./pages/Department/Biology/Courses/Card"
 import ChemCard from "./pages/Department/Chemistry/Courses/Card";
 import PhyCard from "./pages/Department/Physics/Courses/Card";
 import MathCard from "./pages/Department/Maths/Courses/Card"
+import Materials from "./components/Materials"
 
 
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="chemistry/:year" element={<ChemCard />} />
           <Route path="physics/:year" element={<PhyCard />} />
           <Route path="maths/:year" element={<MathCard />} />
+          <Route path="cs/:year/exams" element={<Materials/>}/>
         </Routes>
       </Layout>
     </Router>
