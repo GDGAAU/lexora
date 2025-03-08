@@ -7,7 +7,6 @@ import PhyCourses from "./pages/Department/Physics/Courses/MyCourses";
 import StatCourses from "./pages/Department/Statistics/Courses/MyCourses";
 import BioCourses from "./pages/Department/Biology/Courses/MyCourses";
 import MathsCourses from "./pages/Department/Maths/Courses/MyCourses";
-
 import Materials from "./components/Materials";
 import Semester from "./components/common/Semester";
 
@@ -16,10 +15,7 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          {/* Home Route */}
           <Route path="/" element={<Home />} />
-
-          {/* Department Courses */}
           <Route path="/courses/cs-courses" element={<CsCourses />} />
           <Route path="/courses/chem-courses" element={<ChemCourses />} />
           <Route path="/courses/phy-courses" element={<PhyCourses />} />
