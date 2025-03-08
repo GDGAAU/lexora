@@ -1,19 +1,28 @@
 import CourseCard from "../../../components/common/SemisterCard";
-import { Link, useParams } from "react-router-dom";
-
+import { Link, useParams} from "react-router-dom";
+import { useState } from "react";
 const coursesData = {
   cs: {
     year2: {
       semester1: [
-        { name: "Introduction to Programming", code: "CS101" },
-        { name: "Discrete Mathematics", code: "CS102" },
-        {name:"Global Trends",code:"GlTr1012_"},
-        {name:"Introduction to Linear Algebra",code:"Math2191"},
-        
+        { name: "Computer Programming II", code: "CoSc2111" },
+        { name: "Fundamnetals of Computer Science", code: "CoSc2011" },
+        { name: "Global Trends", code: "GlTr1012_" },
+        { name: "Introduction to Linear Algebra", code: "Math2191" },
+        { name: "Introduction to Statistics", code: "Stat2181" },
+        {
+          name: "Fundamentals of Electricity and Digital Electronics",
+          code: "ECEG1351",
+        },
+        { name: "Calculus I", code: "Math2021" },
       ],
       semester2: [
-        { name: "Data Structures", code: "CS201" },
-        { name: "Algorithms", code: "CS202" },
+        { name: "Calculus II", code: "Math2022" },
+        { name: "Object Oriented Programming", code: "CoSc2212" },
+        { name: "Introduction to Probability Theroty", code: "Stat2182" },
+        { name: "Inclusiveness", code: "SNIE1011" },
+        { name: "Fundameentals of Database", code: "CoSc3051" },
+        { name: "Computer Organization and Assembly Language", code: "CoSc2012" },
       ],
     },
     year3: {
@@ -44,6 +53,11 @@ const coursesData = {
 export default function Semester() {
   const { department, year } = useParams();
   const courses = coursesData[department]?.[year] || {};
+  const [expandedSemester, setExpandedSemester] = useState(null);
+
+  const toggleSemester = (semester) => {
+    setExpandedSemester(expandedSemester === semester ? null : semester);
+  };
 
   return (
     <div className="max-w-7xl mx-auto mt-10">
@@ -52,12 +66,31 @@ export default function Semester() {
         <p className="ml-4 text-gray-500">Unlock Your Future</p>
       </div>
 
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-4">
         {Object.keys(courses).map((semester) => (
-          <Link key={semester} to={`/${department}/${year}/${semester}/courses`}>
-            <CourseCard
-              semester={semester}/>
-          </Link>
+          <div key={semester}>
+            <button
+              className="w-full border p-2 bg-white shadow-sm"
+              onClick={() => toggleSemester(semester)}
+            >
+              <h2 className="font-semibold">{semester}</h2>
+            </button>
+            {expandedSemester === semester && (
+              <div className="mt-2 border p-3 bg-gray-100">
+                {courses[semester].map((course) => (
+                  <Link to={`/${department}/${year}/${semester}/Materials`}>
+                    <div
+                      key={course.code}
+                      className="p-2 border-b last:border-none"
+                    >
+                      <p className="font-semibold">{course.name}</p>
+                      <p className="text-sm text-gray-500">{course.code}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </div>

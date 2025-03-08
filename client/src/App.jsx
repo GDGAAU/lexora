@@ -15,7 +15,7 @@ import PhyCard from "./pages/Department/Physics/Courses/Card";
 import MathCard from "./pages/Department/Maths/Courses/Card";
 import Materials from "./components/Materials";
 import Semester from "./pages/Department/Cs/Semester";
-import Courses from "./pages/Department/Cs/Courses";
+
 function App() {
   return (
     <Router>
@@ -44,10 +44,7 @@ function App() {
             path="/:department/:year/:semester/Materials"
             element={<Materials />}
           />
-          <Route
-            path="/:department/:year/:semester/courses"
-            element={<Courses />}
-          />
+         
         </Routes>
       </Layout>
     </Router>
