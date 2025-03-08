@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { CgNotes } from "react-icons/cg";
 import { FaQuestionCircle } from "react-icons/fa";
 import { PiExamFill } from "react-icons/pi";
+import { useParams } from "react-router-dom";
 
 function Materials() {
+  const { department, course}=useParams();
   const [expandedMenus, setExpandedMenus] = useState({
     courses: false,
     notes: false, // Added state for notes
@@ -26,7 +28,7 @@ function Materials() {
       <div className="bg-white h-screen w-full my-8 border">
         <div>
           <h2 className="font-semibold text-2xl px-8 py-5">
-            Computer Science : Fundamentals of Calculus
+            {department} : {course}
           </h2>
           <p className="px-8 pb-8">
             On sait depuis longtemps que travailler avec du texte lisible et

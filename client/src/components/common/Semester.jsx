@@ -1,8 +1,8 @@
-import CourseCard from "../../../components/common/SemisterCard";
-import { Link, useParams} from "react-router-dom";
+import CourseCard from "./SemisterCard";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 const coursesData = {
-  cs: {
+  ComputerScience: {
     year2: {
       semester1: [
         { name: "Computer Programming II", code: "CoSc2111" },
@@ -30,7 +30,10 @@ const coursesData = {
     },
     year3: {
       semester1: [
-        {name: "Computer Networking and Data Communication",code: "CoSc3211"},
+        {
+          name: "Computer Networking and Data Communication",
+          code: "CoSc3211",
+        },
         { name: "INtroduction to Software Engineering", code: "CoSc3311" },
         { name: "Advanced Database Systems", code: "CoSc3011" },
         { name: "Applied Numerical Analysis", code: "Math3321" },
@@ -44,7 +47,7 @@ const coursesData = {
       ],
     },
   },
-  chem: {
+  Chemistry: {
     year2: {
       semester1: [
         { name: "Organic Chemistry", code: "CHEM101" },
@@ -86,7 +89,9 @@ export default function Semester() {
             {expandedSemester === semester && (
               <div className="mt-2 border p-3 bg-gray-100">
                 {courses[semester].map((course) => (
-                  <Link to={`/${department}/${year}/${semester}/Materials`}>
+                  <Link
+                    to={`/${department}/${year}/${semester}/${course.name}`}
+                  >
                     <div
                       key={course.code}
                       className="p-2 border-b last:border-none"
