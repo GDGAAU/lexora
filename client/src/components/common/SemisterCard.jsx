@@ -2,10 +2,11 @@ import React from "react";
 
 const CourseCard = ({ semester }) => {
   return (
-    <button className="border p-2 bg-white shadow-sm w-full">
-      <div className="flex items-center justify-center h-full">
-        <h2 className="font-semibold">{semester}</h2>
-      </div>
+    <button
+      className="w-full border bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 justify-between"
+      onClick={() => toggleSemester(semester)}
+    >
+      <h2 className="text-lg font-semibold">{semester}</h2>
     </button>
   );
 };

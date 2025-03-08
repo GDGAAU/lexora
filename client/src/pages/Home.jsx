@@ -1,6 +1,6 @@
 import React from 'react';
 // import Layout from '../layouts/layout';
-
+import Footer from '../components/common/Footer';
 function Home() {
   return (
     <div className="max-w-7xl mx-auto">

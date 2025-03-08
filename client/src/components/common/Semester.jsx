@@ -1,6 +1,6 @@
-import CourseCard from "./SemisterCard";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
+
 const coursesData = {
   ComputerScience: {
     year2: {
@@ -119,33 +119,34 @@ export default function Semester() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-10">
-      <div className="flex items-center mb-6">
-        <h1 className="text-2xl font-bold">My Courses</h1>
-        <p className="ml-4 text-gray-500">Unlock Your Future</p>
+    <div className="max-w-7xl mx-auto mt-10 px-4">
+      <div className="flex flex-col items-center mb-6">
+        <h1 className="text-4xl font-bold text-gray-800">My Courses</h1>
+        <p className="text-lg text-gray-500">Unlock Your Future</p>
       </div>
-
-      <div className="grid grid-cols-2 gap-4">
+      <div className="flex gap-4">
         {Object.keys(courses).map((semester) => (
-          <div key={semester}>
+          <div key={semester} className="flex-1">
             <button
-              className="w-full border p-2 bg-white shadow-sm"
+              className="w-full h-12 border  bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 text-2xl font-semibold flex items-center justify-center"
               onClick={() => toggleSemester(semester)}
             >
-              <h2 className="font-semibold">{semester}</h2>
+              {semester.toUpperCase()}
             </button>
             {expandedSemester === semester && (
-              <div className="mt-2 border p-3 bg-gray-100">
+              <div className="mt-3 p-6 border bg-gray-50 rounded-lg shadow-lg">
                 {courses[semester].map((course) => (
                   <Link
+                    key={course.code}
                     to={`/${department}/${year}/${semester}/${course.name}`}
                   >
-                    <div
-                      key={course.code}
-                      className="p-2 border-b last:border-none"
-                    >
-                      <p className="font-semibold">{course.name}</p>
-                      <p className="text-sm text-gray-500">{course.code}</p>
+                    <div className="p-4 mb-3 border border-gray-300 rounded-xl bg-white shadow hover:bg-blue-50 transition duration-300 ease-in-out flex items-center gap-4">
+                      <div>
+                        <p className="text-lg font-semibold text-blue-600">
+                          {course.name}
+                        </p>
+                        <p className="text-sm text-gray-500">{course.code}</p>
+                      </div>
                     </div>
                   </Link>
                 ))}
