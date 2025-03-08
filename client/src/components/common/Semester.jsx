@@ -59,6 +59,54 @@ const coursesData = {
       ],
     },
   },
+  Biology: {
+    year2: {
+      semester1: [
+        { name: "Organic Chemistry", code: "CHEM101" },
+        { name: "Inorganic Chemistry", code: "CHEM102" },
+      ],
+      semester2: [
+        { name: "Physical Chemistry", code: "CHEM201" },
+        { name: "Analytical Chemistry", code: "CHEM202" },
+      ],
+    },
+  },
+  Physics: {
+    year2: {
+      semester1: [
+        { name: "Organic Chemistry", code: "CHEM101" },
+        { name: "Inorganic Chemistry", code: "CHEM102" },
+      ],
+      semester2: [
+        { name: "Physical Chemistry", code: "CHEM201" },
+        { name: "Analytical Chemistry", code: "CHEM202" },
+      ],
+    },
+  },
+  Maths: {
+    year2: {
+      semester1: [
+        { name: "Organic Chemistry", code: "CHEM101" },
+        { name: "Inorganic Chemistry", code: "CHEM102" },
+      ],
+      semester2: [
+        { name: "Physical Chemistry", code: "CHEM201" },
+        { name: "Analytical Chemistry", code: "CHEM202" },
+      ],
+    },
+  },
+  Statistics: {
+    year2: {
+      semester1: [
+        { name: "Organic Chemistry", code: "CHEM101" },
+        { name: "Inorganic Chemistry", code: "CHEM102" },
+      ],
+      semester2: [
+        { name: "Physical Chemistry", code: "CHEM201" },
+        { name: "Analytical Chemistry", code: "CHEM202" },
+      ],
+    },
+  },
 };
 
 export default function Semester() {
