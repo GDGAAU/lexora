@@ -16,14 +16,14 @@ export default function MyCourses() {
             altText="Year 2"
           />
         </Link>
-        <Link to="/cs/Year3/semester">
+        <Link to="/cs/year3/semester">
           <CourseCard
             year="Year 3"
             imageSrc="https://via.placeholder.com/96"
             altText="Year 3"
           />
         </Link>
-        <Link to="/cs/Year4/semester">
+        <Link to="/cs/year4/semester">
           <CourseCard
             year="Year 4"
             imageSrc="https://via.placeholder.com/96"

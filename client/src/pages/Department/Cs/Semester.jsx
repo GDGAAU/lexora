@@ -22,15 +22,23 @@ const coursesData = {
         { name: "Introduction to Probability Theroty", code: "Stat2182" },
         { name: "Inclusiveness", code: "SNIE1011" },
         { name: "Fundameentals of Database", code: "CoSc3051" },
-        { name: "Computer Organization and Assembly Language", code: "CoSc2012" },
+        {
+          name: "Computer Organization and Assembly Language",
+          code: "CoSc2012",
+        },
       ],
     },
     year3: {
       semester1: [
-        { name: "Operating Systems", code: "CS301" },
-        { name: "Database Systems", code: "CS302" },
+        {name: "Computer Networking and Data Communication",code: "CoSc3211"},
+        { name: "INtroduction to Software Engineering", code: "CoSc3311" },
+        { name: "Advanced Database Systems", code: "CoSc3011" },
+        { name: "Applied Numerical Analysis", code: "Math3321" },
+        { name: "Data Structures and Algorithms", code: "CoSc3111" },
+        { name: "Discrete Mathematics and Combinatory", code: "Math2231" },
       ],
       semester2: [
+        { name: "Operating Systems", code: "CS301" },
         { name: "Computer Networks", code: "CS401" },
         { name: "Software Engineering", code: "CS402" },
       ],

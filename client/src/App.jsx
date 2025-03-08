@@ -31,21 +31,15 @@ function App() {
           <Route path="/courses/bio-courses" element={<BioCourses />} />
           <Route path="/courses/stat-courses" element={<StatCourses />} />
           <Route path="/courses/maths-courses" element={<MathsCourses />} />
-          {/* <Route path="/:department/:year/:semester/courses" element={<Cscourses />} /> */}
           <Route path="/:department/:year/:semester" element={<Semester />} />
           <Route path="/cs/:year/exams" element={<Materials />} />
-
           <Route path="/statistics/:year" element={<StatCard />} />
           <Route path="/biology/:year" element={<BiologyCard />} />
           <Route path="/chemistry/:year" element={<ChemCard />} />
           <Route path="/physics/:year" element={<PhyCard />} />
           <Route path="/maths/:year" element={<MathCard />} />
-          <Route
-            path="/:department/:year/:semester/Materials"
-            element={<Materials />}
-          />
-         
-        </Routes>
+          <Route path="/:department/:year/:semester/Materials"element={<Materials />}/>
+          </Routes>
       </Layout>
     </Router>
   );
