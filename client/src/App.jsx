@@ -7,11 +7,7 @@ import PhyCourses from "./pages/Department/Physics/Courses/MyCourses";
 import StatCourses from "./pages/Department/Statistics/Courses/MyCourses";
 import BioCourses from "./pages/Department/Biology/Courses/MyCourses";
 import MathsCourses from "./pages/Department/Maths/Courses/MyCourses";
-import Cscourses from "./pages/Department/Cs/Card";
-import StatCard from "./pages/Department/Statistics/Courses/Card";
-import BiologyCard from "./pages/Department/Biology/Courses/Card";
-import PhyCard from "./pages/Department/Physics/Courses/Card";
-import MathCard from "./pages/Department/Maths/Courses/Card";
+
 import Materials from "./components/Materials";
 import Semester from "./components/common/Semester";
 
