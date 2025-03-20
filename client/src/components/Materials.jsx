@@ -52,8 +52,10 @@ function Materials() {
           </div>
           {expandedMenus.courses && (
             <div className="py-2 space-y-2 bg-white">
+
+
               {/* Notes Dropdown */}
-              <button
+              {/* <button
                 onClick={() => toggleMenu("notes")}
                 className="flex items-center w-full p-2 text-base font-normal text-gray-900 rounded-lg group bg-white"
               >
@@ -68,8 +70,8 @@ function Materials() {
                     <ChevronRight className="w-5 h-5" />
                   )}
                 </span>
-              </button>
-              {expandedMenus.notes && (
+              </button> */}
+              {/* {expandedMenus.notes && (
                 <div className="pl-8 py-2 space-y-2">
                   <Link
                     to="/notes/chapter-1"
@@ -90,7 +92,17 @@ function Materials() {
                     Chapter 3
                   </Link>
                 </div>
-              )}
+              )} */}
+
+
+                <Link
+                to="/organicchemistry"
+                className="flex items-center w-full p-2 text-base font-normal text-gray-900 rounded-lg group bg-white "
+              >
+                <span className="ml-3 flex-1 text-left whitespace-nowrap bg-white border p-4 flex hover:bg-gray-100">
+                  <PiExamFill className="text-blue-400 mt-1 mx-3" /> Notes
+                </span>
+              </Link>
               <Link
                 to="/exams"
                 className="flex items-center w-full p-2 text-base font-normal text-gray-900 rounded-lg group bg-white "
@@ -105,7 +117,7 @@ function Materials() {
               >
                 <span className="ml-3 flex-1 text-left whitespace-nowrap bg-white border p-4 flex hover:bg-gray-100">
                   <FaQuestionCircle className="text-blue-400 mt-1 mx-3" />
-                  Exercises
+                  Exercises 
                 </span>
               </Link>
             </div>

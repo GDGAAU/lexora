@@ -9,6 +9,7 @@ import BioCourses from "./pages/Department/Biology/Courses/MyCourses";
 import MathsCourses from "./pages/Department/Maths/Courses/MyCourses";
 import Materials from "./components/Materials";
 import Semester from "./components/common/Semester";
+import FileList from './pages/Department/Physics/Courses/phynotes'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/courses/maths-courses" element={<MathsCourses />} />
           <Route path="/:department/:year/:semester" element={<Semester />} />
           <Route path="/:department/:year/:semester/:course"element={<Materials />}/>
+          <Route path="/organicchemistry" element={<FileList />} />
         </Routes>
       </Layout>
     </Router>
