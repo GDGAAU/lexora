@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-
+import Layout from "../../layouts/Layout";
 const coursesData = {
   ComputerScience: {
     year2: {
@@ -119,42 +119,44 @@ export default function Semester() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-10 px-4">
-      <div className="flex flex-col items-center mb-6">
-        <h1 className="text-4xl font-bold text-gray-800">My Courses</h1>
-        <p className="text-lg text-gray-500">Unlock Your Future</p>
-      </div>
-      <div className="flex gap-4">
-        {Object.keys(courses).map((semester) => (
-          <div key={semester} className="flex-1">
-            <button
-              className="w-full h-12 border  bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 text-2xl font-semibold flex items-center justify-center"
-              onClick={() => toggleSemester(semester)}
-            >
-              {semester.toUpperCase()}
-            </button>
-            {expandedSemester === semester && (
-              <div className="mt-3 p-6 border bg-gray-50 rounded-lg shadow-lg">
-                {courses[semester].map((course) => (
-                  <Link
-                    key={course.code}
-                    to={`/${department}/${year}/${semester}/${course.name}`}
-                  >
-                    <div className="p-4 mb-3 border border-gray-300 rounded-xl bg-white shadow hover:bg-blue-50 transition duration-300 ease-in-out flex items-center gap-4">
-                      <div>
-                        <p className="text-lg font-semibold text-blue-600">
-                          {course.name}
-                        </p>
-                        <p className="text-sm text-gray-500">{course.code}</p>
+    <Layout>
+      <div className="max-w-7xl mx-auto mt-10 px-4">
+        <div className="flex flex-col items-center mb-6">
+          <h1 className="text-4xl font-bold text-gray-800">My Courses</h1>
+          <p className="text-lg text-gray-500">Unlock Your Future</p>
+        </div>
+        <div className="flex gap-4">
+          {Object.keys(courses).map((semester) => (
+            <div key={semester} className="flex-1">
+              <button
+                className="w-full h-12 border  bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 text-2xl font-semibold flex items-center justify-center"
+                onClick={() => toggleSemester(semester)}
+              >
+                {semester.toUpperCase()}
+              </button>
+              {expandedSemester === semester && (
+                <div className="mt-3 p-6 border bg-gray-50 rounded-lg shadow-lg">
+                  {courses[semester].map((course) => (
+                    <Link
+                      key={course.code}
+                      to={`/${department}/${year}/${semester}/${course.name}`}
+                    >
+                      <div className="p-4 mb-3 border border-gray-300 rounded-xl bg-white shadow hover:bg-blue-50 transition duration-300 ease-in-out flex items-center gap-4">
+                        <div>
+                          <p className="text-lg font-semibold text-blue-600">
+                            {course.name}
+                          </p>
+                          <p className="text-sm text-gray-500">{course.code}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }

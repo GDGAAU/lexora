@@ -5,7 +5,7 @@ import { CgNotes } from "react-icons/cg";
 import { FaQuestionCircle } from "react-icons/fa";
 import { PiExamFill } from "react-icons/pi";
 import { useParams } from "react-router-dom";
-
+import Layout from "../layouts/Layout";
 function Materials() {
   const { department, course}=useParams();
   const [expandedMenus, setExpandedMenus] = useState({
@@ -21,6 +21,7 @@ function Materials() {
   };
 
   return (
+    <Layout>
     <div>
       <div className="w-full h-42 bg-white py-4 text-2xl pl-12 border">
         <h2>Learning Materials</h2>
@@ -125,6 +126,7 @@ function Materials() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }
 
