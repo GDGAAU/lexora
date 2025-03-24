@@ -12,6 +12,8 @@ import Materials from "./components/Materials";
 import Semester from "./components/common/Semester";
 import FileList from "./pages/Department/Physics/Courses/phynotes";
 import Homepage from "./pages/Homepage/home";
+import login from './pages/Auth/login';
+import signup from './pages/Auth/signup';
 function App() {
   return (
     <AuthProvider>
@@ -31,8 +33,9 @@ function App() {
             element={<Materials />}
           />
           <Route path="/organicchemistry" element={<FileList />} />
-          <Route path="/login" element={<AuthContainer initialForm="login" />} />
-          <Route path="/signup" element={<AuthContainer initialForm="signup" />} />
+          <Route path="/login" element={<login />} />
+          <Route path="/signup" element={<signup />} />
+        
         </Routes>
       </Router>
     </AuthProvider>

@@ -59,21 +59,23 @@ function Index() {
             quizzes, and expand your knowledge with books and references.
           </p>
           <div className="mt-6 flex space-x-4">
-            <button
-              className={`px-6 py-3 rounded-lg text-lg transition ${
-                isSignUp ? "bg-blue-600" : "bg-gray-500"
-              }`}
-              onClick={() => setIsSignUp(true)}
+          <button
+            className={`px-6 py-3 rounded-lg text-lg transition ${isSignUp ? "bg-blue-600" : "bg-gray-500"}`}
+            onClick={() => {
+                setIsSignUp(true);
+                navigate("/signup"); // Navigate to signup
+            }}
             >
-              Create An Account
+            Create An Account
             </button>
             <button
-              className={`px-6 py-3 rounded-lg text-lg transition ${
-                !isSignUp ? "bg-blue-600" : "bg-gray-500"
-              }`}
-              onClick={() => setIsSignUp(false)}
+            className={`px-6 py-3 rounded-lg text-lg transition ${!isSignUp ? "bg-blue-600" : "bg-gray-500"}`}
+            onClick={() => {
+                setIsSignUp(false);
+                navigate("/login"); // Navigate to login
+            }}
             >
-              Sign In
+            Sign In
             </button>
           </div>
         </div>
