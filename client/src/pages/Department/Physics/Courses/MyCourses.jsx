@@ -1,9 +1,10 @@
 import CourseCard from "../../../../components/common/CourseCard";
 import { Link } from "react-router-dom";
-
+import Layout from "../../../../layouts/Layout";
 export default function MyCourses() {
   return (
-    <div className="max-w-7xl mx-auto mt-10">
+    <Layout>
+          <div className="max-w-7xl mx-auto mt-10">
       <div className="flex items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">My Courses</h1>
         <p className="ml-4 text-gray-500">Unlock Your Future</p>
@@ -33,5 +34,6 @@ export default function MyCourses() {
         </Link>
       </div>
     </div>
+    </Layout>
   );
 }

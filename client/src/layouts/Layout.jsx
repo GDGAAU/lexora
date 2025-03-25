@@ -1,6 +1,6 @@
 import { Sidebar } from "./Sidebar"
 import Navbar from '../components/Navbar'
-export function Layout({ children }) {
+function Layout({ children }) {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Navbar/>
@@ -12,3 +12,4 @@ export function Layout({ children }) {
   )
 }
 
+export default Layout;
