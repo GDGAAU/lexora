@@ -384,7 +384,7 @@ function Index() {
             className="mt-12 flex justify-center gap-8"
           >
             <div className="text-center">
-              <div className="text-3xl font-bold text-white">10K+</div>
+              <div className="text-3xl font-bold text-white">100+</div>
               <div className="text-indigo-200">Students</div>
             </div>
             <div className="text-center">
@@ -787,7 +787,7 @@ function Index() {
                   <span className="text-indigo-600 font-bold">AB</span>
                 </div>
                 <div>
-                  <h5 className="font-semibold text-gray-800">Abebe Bekele</h5>
+                  <h5 className="font-semibold text-gray-800">Betelehem Jembere</h5>
                   <p className="text-sm text-gray-500">Computer Science Student</p>
                 </div>
               </div>
@@ -828,8 +828,8 @@ function Index() {
                   <span className="text-indigo-600 font-bold">MT</span>
                 </div>
                 <div>
-                  <h5 className="font-semibold text-gray-800">Meron Tadesse</h5>
-                  <p className="text-sm text-gray-500">Engineering Student</p>
+                  <h5 className="font-semibold text-gray-800">Kibru Yisifa</h5>
+                  <p className="text-sm text-gray-500">Statistics Student</p>
                 </div>
               </div>
               <p className="text-gray-600 mb-4">
@@ -867,7 +867,7 @@ function Index() {
                 </div>
                 <div>
                   <h5 className="font-semibold text-gray-800">Kidus Girma</h5>
-                  <p className="text-sm text-gray-500">Business Student</p>
+                  <p className="text-sm text-gray-500">Physics Student</p>
                 </div>
               </div>
               <p className="text-gray-600 mb-4">
@@ -908,9 +908,9 @@ function Index() {
             <div className="inline-block px-3 py-1 rounded-full bg-white/20 text-white font-medium text-sm mb-4">
               Get In Touch
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Learning?</h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Interested about GDG services?</h3>
             <p className="max-w-3xl mx-auto text-indigo-100">
-              Contact us today to learn more about Lexora and how we can help you achieve your academic goals.
+              Contact us today to know more about GDG.
             </p>
           </motion.div>
 
