@@ -1,24 +1,47 @@
-
-import { useState } from "react"
-import { auth } from "../../firebase/Firebase"
-import { useNavigate } from "react-router-dom"
-import { LockIcon, MailIcon, LogInIcon, Eye, EyeOff } from "lucide-react"
+import { useState } from "react";
+import { auth } from "../../firebase/Firebase";
+import { useNavigate } from "react-router-dom";
+import {
+  LockIcon,
+  MailIcon,
+  LogInIcon,
+  Eye,
+  EyeOff,
+  Loader2,
+} from "lucide-react"; // Import Loader icon
 
 function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [loading, setLoading] = useState(false); // State for loader
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    setError("");
+    setEmailError("");
+    setLoading(true); // Start loader
+
     try {
-      await auth.signInWithEmailAndPassword(email, password)
-      navigate("/home")
+      await auth.signInWithEmailAndPassword(email, password);
+      navigate("/home");
     } catch (error) {
-      alert(error.message)
+      if (error.code === "auth/user-not-found") {
+        setEmailError("Email does not exist. Please check or sign up.");
+      } else if (error.code === "auth/wrong-password") {
+        setError("Incorrect password. Please try again.");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false); // Stop loader after request completes
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -35,9 +58,12 @@ function Login() {
 
           {/* Form content */}
           <div className="px-6 py-12 pt-16">
-            <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">Welcome Back</h2>
+            <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
+              Welcome Back
+            </h2>
 
             <form onSubmit={handleLogin} className="space-y-6">
+              {/* Email Input */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <MailIcon className="h-5 w-5 text-gray-400" />
@@ -47,11 +73,22 @@ function Login() {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                  className={`pl-10 w-full px-4 py-3 border ${
+                    emailError ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:outline-none focus:ring-2 ${
+                    emailError
+                      ? "focus:ring-red-500 focus:border-red-500"
+                      : "focus:ring-indigo-500 focus:border-transparent"
+                  } transition-all`}
                   required
+                  disabled={loading} // Disable input while loading
                 />
+                {emailError && (
+                  <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                )}
               </div>
 
+              {/* Password Input */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <LockIcon className="h-5 w-5 text-gray-400" />
@@ -63,11 +100,13 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                   required
+                  disabled={loading} // Disable input while loading
                 />
                 <button
                   type="button"
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                   onClick={() => setShowPassword(!showPassword)}
+                  disabled={loading} // Disable button while loading
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
@@ -77,6 +116,9 @@ function Login() {
                 </button>
               </div>
 
+              {/* General Error Message */}
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
@@ -84,24 +126,37 @@ function Login() {
                     name="remember-me"
                     type="checkbox"
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    disabled={loading} // Disable while loading
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 block text-sm text-gray-700"
+                  >
                     Remember me
                   </label>
                 </div>
 
                 <div className="text-sm">
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="#"
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
                     Forgot password?
                   </a>
                 </div>
               </div>
 
+              {/* Submit Button with Loader */}
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+                className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
+                disabled={loading} // Disable button while loading
               >
-                Sign In
+                {loading ? (
+                  <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </form>
 
@@ -125,8 +180,7 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
-
+export default Login;
