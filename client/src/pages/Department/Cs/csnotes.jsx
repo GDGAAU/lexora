@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Layout from "../../../layouts/Layout";
 
 const FileList = () => {
   const [files, setFiles] = useState([]);
@@ -28,21 +29,28 @@ const FileList = () => {
 
   return (
     <div>
-      <h2>Google Drive Files</h2>
-      <ul>
-        {files.map((file) => (
-          <li key={file.id}>
-            <strong>{file.name}</strong> <br />
-            <a href={file.webViewLink} target="_blank" rel="noopener noreferrer">
-              View
-            </a>{" "}
-            |{" "}
-            <a href={file.webContentLink} download>
-              Download
-            </a>
-          </li>
-        ))}
-      </ul>
+
+      
+        <h2>Google Drive Files</h2>
+        <ul>
+          {files.map((file) => (
+            <li key={file.id}>
+              <strong>{file.name}</strong> <br />
+              <a
+                href={file.webViewLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View
+              </a>{" "}
+              |{" "}
+              <a href={file.webContentLink} download>
+                Download
+              </a>
+            </li>
+          ))}
+        </ul>
+
     </div>
   );
 };
