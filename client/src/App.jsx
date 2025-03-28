@@ -9,7 +9,7 @@ import BioCourses from "./pages/Department/Biology/Courses/MyCourses";
 import MathsCourses from "./pages/Department/Maths/Courses/MyCourses";
 import Materials from "./components/Materials";
 import Semester from "./components/common/Semester";
-import FileList from "./pages/Department/Physics/Courses/phynotes";
+import FileList from "./pages/Department/Cs/csnotes";
 import Homepage from "./pages/Homepage/home";
 import Login from './pages/Auth/Login';  // Updated import
 import Signup from './pages/Auth/Signup';  // Updated import
