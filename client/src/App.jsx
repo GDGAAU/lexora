@@ -21,12 +21,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />
-
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
           {/* Protect routes that require authentication */}
-          <Route path="/home" element={<ProtectedRoute element={<Home />} />  } />
           <Route
             path="/courses/cs-courses"
             element={<ProtectedRoute element={<CsCourses />} />}
