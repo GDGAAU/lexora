@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { auth } from "../../firebase/Firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import {
   LockIcon,
@@ -8,18 +9,19 @@ import {
   Eye,
   EyeOff,
   Loader2,
-} from "lucide-react"; // Import Loader icon
+} from "lucide-react";
 
 function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState(""); // General error messages
-  const [emailError, setEmailError] = useState(""); // Email-specific errors
-  const [passwordError, setPasswordError] = useState(""); // Password-specific errors
-  const [loading, setLoading] = useState(false); // Loader state
+  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ function Signup() {
     setError("");
     setEmailError("");
     setPasswordError("");
-    setLoading(true); // Start loader
+    setLoading(true);
 
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
@@ -37,7 +39,17 @@ function Signup() {
     }
 
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // Update Firebase profile with displayName
+      await updateProfile(user, { displayName: name });
+
+      localStorage.setItem("userName", name);
       navigate("/home");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -50,7 +62,7 @@ function Signup() {
         setError(error.message);
       }
     } finally {
-      setLoading(false); // Stop loader
+      setLoading(false);
     }
   };
 
@@ -58,7 +70,6 @@ function Signup() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          {/* Header */}
           <div className="relative h-32 bg-gradient-to-r from-indigo-500 to-purple-600">
             <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-white p-3 rounded-full shadow-md">
               <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full p-3">
@@ -67,60 +78,57 @@ function Signup() {
             </div>
           </div>
 
-          {/* Form content */}
           <div className="px-6 py-12 pt-16">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
               Create an Account
             </h2>
-
             <form onSubmit={handleSignup} className="space-y-6">
-              {/* Email Input */}
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <MailIcon className="h-5 w-5 text-gray-400" />
-                </div>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  required
+                  disabled={loading}
+                />
+              </div>
+
+              <div className="relative">
                 <input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`pl-10 w-full px-4 py-3 border ${
-                    emailError ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all`}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   required
-                  disabled={loading} // Disable while loading
+                  disabled={loading}
                 />
               </div>
               {emailError && (
                 <p className="text-red-500 text-sm">{emailError}</p>
               )}
 
-              {/* Password Input */}
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockIcon className="h-5 w-5 text-gray-400" />
-                </div>
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`pl-10 w-full px-4 py-3 border ${
-                    passwordError ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all`}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   required
-                  disabled={loading} // Disable while loading
+                  disabled={loading}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-3"
                   onClick={() => setShowPassword(!showPassword)}
-                  disabled={loading} // Disable while loading
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeOff className="h-5 w-5 text-gray-400" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <Eye className="h-5 w-5 text-gray-400" />
                   )}
                 </button>
               </div>
@@ -128,58 +136,50 @@ function Signup() {
                 <p className="text-red-500 text-sm">{passwordError}</p>
               )}
 
-              {/* Confirm Password Input */}
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockIcon className="h-5 w-5 text-gray-400" />
-                </div>
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   required
-                  disabled={loading} // Disable while loading
+                  disabled={loading}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-3"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  disabled={loading} // Disable while loading
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeOff className="h-5 w-5 text-gray-400" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <Eye className="h-5 w-5 text-gray-400" />
                   )}
                 </button>
               </div>
 
-              {/* Error Message for Password Mismatch */}
               {error && <p className="text-red-500 text-sm">{error}</p>}
 
-              {/* Signup Button with Loader */}
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
-                disabled={loading} // Disable button while loading
+                className="w-full py-3 bg-indigo-500 text-white font-medium rounded-lg shadow-md hover:bg-indigo-600 transition"
+                disabled={loading}
               >
                 {loading ? (
-                  <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                  <Loader2 className="h-5 w-5 animate-spin" />
                 ) : (
                   "Sign Up"
                 )}
               </button>
             </form>
-
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-600">
                 Already have an account?{" "}
                 <a
                   href="#"
                   onClick={() => navigate("/login")}
-                  className="text-indigo-600 hover:text-indigo-800 font-medium"
+                  className="text-indigo-600"
                 >
                   Log In
                 </a>
