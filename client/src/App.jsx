@@ -14,6 +14,7 @@ import Homepage from "./pages/Homepage/home";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import ProtectedRoute from "./pages/Auth/ProtectedRoute"; 
+import Notfound from "./pages/NotFound";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           />
 
           <Route path="/organicchemistry" element={<FileList />} />
+          <Route path="/not-found" element={<Notfound/>} />
         </Routes>
       </Router>
     </AuthProvider>
