@@ -11,8 +11,9 @@ import Materials from "./components/Materials";
 import Semester from "./components/common/Semester";
 import FileList from "./pages/Department/Cs/csnotes";
 import Homepage from "./pages/Homepage/home";
-import Login from './pages/Auth/Login';  // Updated import
-import Signup from './pages/Auth/Signup';  // Updated import
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
+import ProtectedRoute from "./pages/Auth/ProtectedRoute"; 
 
 function App() {
   return (
@@ -20,17 +21,45 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/home" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/courses/cs-courses" element={<CsCourses />} />
-          <Route path="/courses/chem-courses" element={<ChemCourses />} />
-          <Route path="/courses/phy-courses" element={<PhyCourses />} />
-          <Route path="/courses/bio-courses" element={<BioCourses />} />
-          <Route path="/courses/stat-courses" element={<StatCourses />} />
-          <Route path="/courses/maths-courses" element={<MathsCourses />} />
-          <Route path="/:department/:year/:semester" element={<Semester />} />
-          <Route path="/:department/:year/:semester/:course" element={<Materials />} />
+
+          {/* Protect routes that require authentication */}
+          <Route path="/home" element={<ProtectedRoute element={<Home />} />  } />
+          <Route
+            path="/courses/cs-courses"
+            element={<ProtectedRoute element={<CsCourses />} />}
+          />
+          <Route
+            path="/courses/chem-courses"
+            element={<ProtectedRoute element={<ChemCourses />} />}
+          />
+          <Route
+            path="/courses/phy-courses"
+            element={<ProtectedRoute element={<PhyCourses />} />}
+          />
+          <Route
+            path="/courses/bio-courses"
+            element={<ProtectedRoute element={<BioCourses />} />}
+          />
+          <Route
+            path="/courses/stat-courses"
+            element={<ProtectedRoute element={<StatCourses />} />}
+          />
+          <Route
+            path="/courses/maths-courses"
+            element={<ProtectedRoute element={<MathsCourses />} />}
+          />
+          <Route
+            path="/:department/:year/:semester"
+            element={<ProtectedRoute element={<Semester />} />}
+          />
+          <Route
+            path="/:department/:year/:semester/:course"
+            element={<ProtectedRoute element={<Materials />} />}
+          />
+
           <Route path="/organicchemistry" element={<FileList />} />
         </Routes>
       </Router>

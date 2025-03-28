@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { auth } from "../../firebase/Firebase";
+import { auth, db } from "../../firebase/Firebase"; // Import Firestore
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 import {
   LockIcon,
   MailIcon,
@@ -48,6 +49,13 @@ function Signup() {
 
       // Update Firebase profile with displayName
       await updateProfile(user, { displayName: name });
+
+      // Store user data in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        name,
+        email,
+        role: "user", // Default role for new users
+      });
 
       localStorage.setItem("userName", name);
       navigate("/home");

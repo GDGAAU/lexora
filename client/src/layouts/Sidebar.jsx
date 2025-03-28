@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { auth } from "../firebase/Firebase"; // Import Firebase auth
-import { Book, ChevronDown, ChevronRight, Menu, User } from "lucide-react";
+import {
+  Book,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  User,
+  LogOut,
+} from "lucide-react"; // Add LogOut icon
 import { FaGraduationCap } from "react-icons/fa";
 import { cn } from "../lib/utils";
 
@@ -11,6 +18,7 @@ export function Sidebar({ className }) {
   const [isOpen, setIsOpen] = useState(true);
   const [expandedMenus, setExpandedMenus] = useState({ courses: false });
   const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -33,6 +41,17 @@ export function Sidebar({ className }) {
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  // Handle user logout and redirect to login page
+  const handleLogout = async () => {
+    try {
+      await auth.signOut(); // Sign out from Firebase
+      setUser(null); // Remove user from state
+      navigate("/login"); // Redirect to login page
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -143,6 +162,12 @@ export function Sidebar({ className }) {
                 <p className="font-semibold">{user.displayName || "User"}</p>
                 <p className="text-sm text-gray-500">{user.email}</p>
               </div>
+              <button
+                onClick={handleLogout}
+                className="ml-4 text-red-500 hover:text-red-700"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
             </div>
           )}
         </div>
