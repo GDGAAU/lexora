@@ -29,35 +29,35 @@ function App() {
           {/* Protect routes that require authentication */}
           <Route
             path="/courses/cs-courses"
-            element={<ProtectedRoute element={<CsCourses />} />}
+            element={<CsCourses />}
           />
           <Route
             path="/courses/chem-courses"
-            element={<ProtectedRoute element={<ChemCourses />} />}
+           element={<ChemCourses />} 
           />
           <Route
             path="/courses/phy-courses"
-            element={<ProtectedRoute element={<PhyCourses />} />}
+            element={<PhyCourses />} 
           />
           <Route
             path="/courses/bio-courses"
-            element={<ProtectedRoute element={<BioCourses />} />}
+            element={<BioCourses />} 
           />
           <Route
             path="/courses/stat-courses"
-            element={<ProtectedRoute element={<StatCourses />} />}
+           element={<StatCourses />} 
           />
           <Route
             path="/courses/maths-courses"
-            element={<ProtectedRoute element={<MathsCourses />} />}
+            element={<MathsCourses />} 
           />
           <Route
             path="/:department/:year/:semester"
-            element={<ProtectedRoute element={<Semester />} />}
+            element={<Semester />}
           />
           <Route
             path="/:department/:year/:semester/:course"
-            element={<ProtectedRoute element={<Materials />} />}
+            element={<Materials />}
           />
 
           <Route path="/organicchemistry" element={<FileList />} />
